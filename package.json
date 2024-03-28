@@ -13,11 +13,13 @@
     "classnames": "^2.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-loader-spinner": "^6.1.6",
     "recoil": "^0.7.7",
     "sass": "^1.72.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.30",
+    "@types/qrcode": "^1.5.5",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.2.0",

@@ -4,6 +4,8 @@ import { IProduct } from "../types/Types"
 import CartItem from "./items/CartItem"
 import styles from "./Cart.module.scss"
 import classNames from "classnames/bind"
+import QRCode from 'qrcode'
+import { ThreeCircles } from "react-loader-spinner"
 
 const cx = classNames.bind(styles)
 
@@ -11,6 +13,7 @@ const Cart = () => {
     const [shopProducts, setShopProducts] = useLocalStorage(LocalStorageKeys.SHOP_PRODUCTS)
     const [cartProducts, setCartProducts] = useLocalStorage(LocalStorageKeys.CART_PRODUCTS)
     const [priceSum, setPriceSum] = useState(0)
+    const [isQRLoading, setIsQRLoading] = useState(true)
     const [hasProducts, setHasProducts] = useState(false);
 
 
@@ -20,19 +23,12 @@ const Cart = () => {
         } else {
             setHasProducts(false);
         }
+        setIsQRLoading(true)
     }, [cartProducts]);
 
-    useEffect(() => {
-        // if (cartProducts == null) return;
-
-        // let sum = 0;
-
-        // console.log(cartProducts)
-        // cartProducts.map((product) => {
-        //     sum += 
-        // })
-    }, [])
-
+    const handleGenerateQRCode = () => {
+        window.location.href = `https://img.vietqr.io/image/MB-0566181526-qr_only.png?amount=${cartProducts?.reduce((total, item) => total + item.price * item.quantity * 23000, 0)}`
+    }
 
     return (
 
@@ -55,9 +51,30 @@ const Cart = () => {
             ) : (
                 <p>Chưa có sản phẩm nào trong giỏ hàng.</p>
             )}
-                <p style={{ marginTop: '40px' }}>Tổng tiền:  ${cartProducts?.reduce((total, item) => total + item.price * item.quantity, 0)}</p>
+            <p style={{ marginTop: '40px' }}>Tổng tiền:  ${cartProducts?.reduce((total, item) => total + item.price * item.quantity, 0)}</p>
+            <h3>Vui lòng quét mã QR dưới đây để thanh toán mua hàng:</h3>
+            <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                <div style={{ padding: 8, borderRadius: 8, borderWidth: 3, borderStyle: 'solid', borderColor: '#ccc' }}>
+                    <ThreeCircles
+                        visible={isQRLoading}
+                        height="200"
+                        width="200"
+                        color="#4fa94d"
+                        ariaLabel="three-circles-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                    />
+                    <img
+                        src={`https://img.vietqr.io/image/MB-0566181526-qr_only.png?amount=${cartProducts?.reduce((total, item) => total + item.price * item.quantity * 23000, 0)}`}
+                        style={{ width: '200px', height: '200px', display: isQRLoading ? 'none' : 'block' }}
+                        onLoad={(e) => {
+                            setIsQRLoading(false)
+                        }}
+                    />
+                </div>
+
+            </div>
             <div className="cart-total" style={{ marginTop: '40px', textAlign: 'right' }}>
-                <button className='button-pay'>Thanh toán</button>
             </div>
         </div>
 

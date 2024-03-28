@@ -12,10 +12,8 @@ const cx = classNames.bind(styles)
 const Shop = () => {
     const [shopProducts, setShopProducts] = useLocalStorage(LocalStorageKeys.SHOP_PRODUCTS)
     const [cartProducts, setCartProducts] = useLocalStorage(LocalStorageKeys.CART_PRODUCTS)
-    console.log(cartProducts);
-    
-    return (
 
+    return (
         <div>
             <h1>Danh sách sản phẩm Pokémon</h1>
             <ShopController />
