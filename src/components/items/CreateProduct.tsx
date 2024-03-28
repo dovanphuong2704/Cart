@@ -7,12 +7,12 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 const CreateProduct = () => {
-    const [shopProducts, setShopProducts] = useLocalStorage(LocalStorageKeys.SHOP_PRODUCTS) as [IProduct[], (value: IProduct[] | null) => void];
+    const [shopProducts, setShopProducts] = useLocalStorage(LocalStorageKeys.SHOP_PRODUCTS)
     const [showAddProductForm, setShowAddProductForm] = useState(false);
     const [newProduct, setNewProduct] = useState<IProduct>({
         id: Number(''),
         name: '',
-        price: 1, 
+        price: 1,
         description: '',
         image: '',
         quantity: 1
@@ -29,16 +29,9 @@ const CreateProduct = () => {
 
     const addNewProductToList = () => {
         const newId = generateNewId();
-        const updatedProduct = {
-            ...newProduct,
-            id: newId
-        };
-        const updatedProducts = [...shopProducts, updatedProduct];
-        console.log(updatedProducts);
-
-        localStorage.setItem('listProduct', JSON.stringify(updatedProducts));
-        setShopProducts(updatedProducts);
-        setShowAddProductForm(false); // Đóng form sau khi thêm sản phẩm
+        const temporaryShopProducts = [...shopProducts || [], { ...newProduct, id: newId }];
+        setShopProducts(temporaryShopProducts);
+        setShowAddProductForm(false);
     };
 
     return (

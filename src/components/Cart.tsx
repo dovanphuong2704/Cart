@@ -10,6 +10,7 @@ const cx = classNames.bind(styles)
 const Cart = () => {
     const [shopProducts, setShopProducts] = useLocalStorage(LocalStorageKeys.SHOP_PRODUCTS)
     const [cartProducts, setCartProducts] = useLocalStorage(LocalStorageKeys.CART_PRODUCTS)
+    const [priceSum, setPriceSum] = useState(0)
     const [hasProducts, setHasProducts] = useState(false);
 
 
@@ -20,6 +21,17 @@ const Cart = () => {
             setHasProducts(false);
         }
     }, [cartProducts]);
+
+    useEffect(() => {
+        // if (cartProducts == null) return;
+
+        // let sum = 0;
+
+        // console.log(cartProducts)
+        // cartProducts.map((product) => {
+        //     sum += 
+        // })
+    }, [])
 
 
     return (

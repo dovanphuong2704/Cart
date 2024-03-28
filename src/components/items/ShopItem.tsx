@@ -14,11 +14,21 @@ const ShopItem = ({ data }: ShopItemProps) => {
         // Nếu sản phẩm này chưa có trong giỏ hàng
         if (cartProducts?.findIndex((item: IProduct) => item.id === data.id) === -1) {
             const temporary = [...cartProducts]
-            temporary.push(data)
+            const temporaryData = JSON.parse(JSON.stringify(data))
+            temporaryData.quantity = 1;
+            temporary.push(temporaryData)
             setCartProducts(temporary)
         } else {
+            const temporary = JSON.parse(JSON.stringify(cartProducts || []))
             const idx = cartProducts?.findIndex((item: IProduct) => item.id == data.id)
-            alert('Sản phẩm đã có trong giỏ hàng'); 
+            if (idx != undefined && idx != -1) {
+                if (temporary[idx].quantity < data.quantity) {
+                    temporary[idx].quantity = temporary[idx].quantity + 1
+                } else { // Nếu sản phẩm hêt hàng (Số lượng trong giỏ hàng vượt quá hàng tồn kho)
+                    alert('Hết hàng!')
+                }
+            }
+            setCartProducts(temporary)
         }
     }
 
