@@ -57,6 +57,8 @@ const ShopController = () => {
             setShopProducts(itemProductData)
         }
     }, [shopProducts])
+    console.log(shopProducts);
+    
 
     return <></>
 }

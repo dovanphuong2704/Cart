@@ -1,0 +1,31 @@
+// ShopItem.module.scss
+
+.new-product-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold; 
+}
+
+.new-product-form input[type="text"],
+.new-product-form input[type="number"] {
+    width: 100%; 
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+.new-product-form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.new-product-form button:last-child {
+    margin-left: 10px;
+    background-color: #dc3545;
+}

@@ -2,24 +2,38 @@ import ShopController from "../controllers/ShopController"
 import { IProduct } from "../types/Types"
 import { LocalStorageKeys, useLocalStorage } from "../utils/useLocalStorage"
 import ShopItem from "./items/ShopItem"
+import classNames from "classnames/bind"
+import styles from "./shop.module.scss"
+import CreateProduct from './items/CreateProduct'
+
+
+const cx = classNames.bind(styles)
 
 const Shop = () => {
     const [shopProducts, setShopProducts] = useLocalStorage(LocalStorageKeys.SHOP_PRODUCTS)
     const [cartProducts, setCartProducts] = useLocalStorage(LocalStorageKeys.CART_PRODUCTS)
 
+    console.log(shopProducts);
+    
     return (
+
         <div>
+            <h1>Danh sách sản phẩm Pokémon</h1>
             <ShopController />
-            <h1>Shop</h1>
+            <CreateProduct />
+
             {shopProducts != null && shopProducts.map((item: IProduct, index: number) => {
                 return (
-                    <ShopItem 
-                        key={item.id}
-                        data={item}
-                    />
+                    <div className={cx("container-list")} key={index} >
+                        <ShopItem
+                            key={item.id}
+                            data={item}
+                        />
+                    </div>
                 )
             })}
         </div>
+
     )
 }
 
