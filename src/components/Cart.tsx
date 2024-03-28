@@ -55,7 +55,7 @@ const Cart = () => {
             ) : (
                 <p>Chưa có sản phẩm nào trong giỏ hàng.</p>
             )}
-            <p className="cart-total-text">Tổng tiền: </p>
+                <p style={{ marginTop: '40px' }}>Tổng tiền:  ${cartProducts?.reduce((total, item) => total + item.price * item.quantity, 0)}</p>
             <div className="cart-total" style={{ marginTop: '40px', textAlign: 'right' }}>
                 <button className='button-pay'>Thanh toán</button>
             </div>
