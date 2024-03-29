@@ -3,6 +3,7 @@ import { IProduct } from "../../types/Types"
 import { LocalStorageKeys, useLocalStorage } from "../../utils/useLocalStorage"
 import styles from './ShopItem.module.scss'
 import classNames from "classnames/bind"
+import { toast } from "react-toastify"
 
 const cx = classNames.bind(styles)
 interface ShopItemProps {
@@ -28,11 +29,9 @@ const ShopItem = ({ data }: ShopItemProps) => {
             setCartProducts(temporary)
             setShowDetails(false);
 
-            alert("Sản phẩm đã thêm vào giỏ hàng!")
+            toast('Đã thêm vào giỏ hàng!', { type: 'success', theme: 'colored' })
         } else {
-
-
-            alert("Sản phẩm đã có trong giỏ hàng!")
+            toast('Sản phẩm đã có trong giỏ hàng!', { type: 'error', theme: 'colored' })
         }
     }
     const handleDelete = () => {

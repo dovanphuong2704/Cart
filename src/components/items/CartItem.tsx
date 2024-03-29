@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 import { LocalStorageKeys, useLocalStorage } from "../../utils/useLocalStorage"
 import styles from './CartItem.module.scss'
 import classNames from "classnames/bind"
+import { toast } from "react-toastify";
 const cx = classNames.bind(styles)
 
 interface ShopItemProps {
@@ -56,9 +57,10 @@ const CartItem = ({ dataCart }: ShopItemProps) => {
                     setCartProducts(updatedCartProducts)
                 }
             }
-            alert("Đã cập nhật thành công")
+            // alert("Đã cập nhật thành công")
+            toast('Đã cập nhật thành công!', { type: 'success', theme: 'colored' })
         } else {
-            alert("Không đủ số lượng hàng")
+            toast('Không đủ số lượng hàng!', { type: 'error', theme: 'colored' })
         }
     }
 
