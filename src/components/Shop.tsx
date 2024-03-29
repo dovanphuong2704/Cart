@@ -29,6 +29,9 @@ const Shop = () => {
                     </div>
                 )
             })}
+            {shopProducts && shopProducts.length === 0 && (
+                <div className={cx("empty-list")}>Không có sản phẩm</div>
+            )}
         </div>
 
     )

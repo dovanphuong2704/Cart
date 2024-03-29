@@ -1,17 +1,18 @@
-import { useEffect } from "react"
-import { LocalStorageKeys, useLocalStorage } from "../utils/useLocalStorage"
-import { IProduct } from "../types/Types"
-import bulbasaur from '../assets/images/bulbasaur.png'
-import charmander from '../assets/images/charmander.png'
-import lvysaur from '../assets/images/lvysaur.png'
-import squirtle from '../assets/images/squirtle.png'
-import venusaur from '../assets/images/venusaur.png'
+import { useEffect, useState } from "react";
+import { LocalStorageKeys, useLocalStorage } from "../utils/useLocalStorage";
+import { IProduct } from "../types/Types";
+import bulbasaur from '../assets/images/bulbasaur.png';
+import charmander from '../assets/images/charmander.png';
+import lvysaur from '../assets/images/lvysaur.png';
+import squirtle from '../assets/images/squirtle.png';
+import venusaur from '../assets/images/venusaur.png';
 
 const ShopController = () => {
-    const [shopProducts, setShopProducts] = useLocalStorage(LocalStorageKeys.SHOP_PRODUCTS)
+    const [shopProducts, setShopProducts] = useLocalStorage(LocalStorageKeys.SHOP_PRODUCTS);
+    const [initialized, setInitialized] = useState(true);
 
     useEffect(() => {
-        if (shopProducts != null && shopProducts.length == 0) {
+        if (!initialized && (shopProducts == null || shopProducts.length === 0)) {
             const itemProductData: IProduct[] = [
                 {
                     id: 1,
@@ -54,12 +55,12 @@ const ShopController = () => {
                     quantity: 3
                 }
             ];
-            setShopProducts(itemProductData)
+            setShopProducts(itemProductData);
+            setInitialized(false);
         }
-    }, [])
-    
+    }, [shopProducts, initialized, setShopProducts]);
 
-    return null
+    return null;
 }
 
-export default ShopController
+export default ShopController;

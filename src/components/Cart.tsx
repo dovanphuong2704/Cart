@@ -62,7 +62,7 @@ const Cart = () => {
                 <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                     <h3>Vui lòng quét mã QR dưới đây để thanh toán mua hàng:</h3>
 
-                    <div style={{ padding: 8, borderRadius: 8, borderWidth: 3, borderStyle: 'solid', borderColor: '#ccc' }}>
+                    <div style={{ padding: 8, borderRadius: 8, borderWidth: 3, borderStyle: 'solid', borderColor: '#ccc', margin:'20px' }}>
                         <ThreeCircles
                             visible={isQRLoading}
                             height="200"

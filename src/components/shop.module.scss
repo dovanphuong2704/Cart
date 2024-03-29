@@ -1,3 +1,13 @@
 .container-list{
     width: 100%;
 }
+.empty-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; 
+    font-size: 44px;
+    color: #555;
+
+  }
+  

@@ -66,11 +66,6 @@ const CartItem = ({ dataCart }: ShopItemProps) => {
     }
 
 
-    console.log("cart", dataCart.quantity);
-
-    console.log(newQuantity);
-
-
     return (
         <table className={cx("cart-item")}>
             <thead>
