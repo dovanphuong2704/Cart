@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { IProduct } from '../types/Types';
 
 export const LocalStorageKeys = {
+    HAS_FIRST_JOIN_TIME: 'HAS_FIRST_JOIN_TIME',
     SHOP_PRODUCTS: 'SHOP_PRODUCTS',
     CART_PRODUCTS: 'CART_PRODUCTS'
   }
