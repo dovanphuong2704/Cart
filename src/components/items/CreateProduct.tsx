@@ -12,10 +12,10 @@ const CreateProduct = () => {
     const [newProduct, setNewProduct] = useState<IProduct>({
         id: Number(''),
         name: '',
-        price: 1,
+        price: 0,
         description: '',
         image: '',
-        quantity: 1
+        quantity: 0
     });
 
     const generateNewId = () => {
@@ -33,6 +33,9 @@ const CreateProduct = () => {
         setShopProducts(temporaryShopProducts);
         setShowAddProductForm(false);
     };
+
+    console.log(newProduct);
+
 
     return (
         <>
@@ -53,12 +56,19 @@ const CreateProduct = () => {
                                 />
                             </label>
                             <label>
-                                Giá:
+                                Giá: 
                                 <input
                                     type="text"
                                     value={newProduct.price}
-                                    onChange={(e) => setNewProduct({ ...newProduct, price: Number(e.target.value) })}
+                                    onChange={(e) => {
+                                        const value = e.target.value;
+                                        if (value === '' || /^\d*$/.test(value)) { // Kiểm tra xem giá trị nhập vào có phải là số không
+                                            const price = value === '' ? 0 : parseInt(value); // Chuyển đổi giá trị thành số nguyên
+                                            setNewProduct({ ...newProduct, price });
+                                        }
+                                    }}
                                 />
+
                             </label>
                             <label>
                                 Mô tả:
@@ -79,10 +89,17 @@ const CreateProduct = () => {
                             <label>
                                 Số lượng:
                                 <input
-                                    type="number"
+                                    type="text"
                                     value={newProduct.quantity}
-                                    onChange={(e) => setNewProduct({ ...newProduct, quantity: Number(e.target.value) })}
+                                    onChange={(e) => {
+                                        const value = e.target.value;
+                                        if (value === '' || /^\d*$/.test(value)) { // Kiểm tra xem giá trị nhập vào có phải là số không
+                                            const quantity = value === '' ? 0 : parseInt(value); // Chuyển đổi giá trị thành số nguyên
+                                            setNewProduct({ ...newProduct, quantity });
+                                        }
+                                    }}
                                 />
+
                             </label>
                             <button onClick={() => addNewProductToList()} type="button">Thêm sản phẩm</button>
                         </form>

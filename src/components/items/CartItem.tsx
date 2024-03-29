@@ -85,7 +85,7 @@ const CartItem = ({ dataCart }: ShopItemProps) => {
             </thead>
             <tbody>
                 <tr>
-                    <td className={cx("cart-product-image-cell")}>
+                    <td className={cx("cart-product-image-cell")}>  
                         <img className={cx("cart-product-image")} src={dataCart.image} alt={dataCart.name} />
                     </td>
                     <td className={cx("cart-product-name")}>
