@@ -4,3 +4,7 @@
     display: flex;
     justify-content: space-around;
 }
+.cart-item {
+    border-bottom: 1px solid #ddd;
+    width: calc(100% - 20px);
+}

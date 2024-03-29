@@ -1,8 +1,5 @@
 /* CartItem.module.scss */
-.cart-item {
-    border-bottom: 1px solid #ddd;
-    width: calc(100% - 20px);
-}
+
 
 .cart-product-image-cell {
     width: 140px;
@@ -12,7 +9,7 @@
 .cart-product-image {
     width: 100%;
     height: auto;
-    max-width: 80px; 
+    max-width: 80px;
 }
 
 .cart-product-name {
@@ -57,4 +54,19 @@
 .button-cart-plus:active,
 .button-cart-delete:active {
     background-color: #b71c1c;
+}
+
+.cart-product-quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-product-quantity input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    outline: none;
+    margin-top: 30px;
 }
