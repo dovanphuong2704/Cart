@@ -15,7 +15,7 @@ const Cart = () => {
     const [priceSum, setPriceSum] = useState(0)
     const [isQRLoading, setIsQRLoading] = useState(true)
     const [hasProducts, setHasProducts] = useState(false);
-
+    const [showQR, setShowQR] = useState(false); // State để kiểm tra hiển thị mã QR
 
     useEffect(() => {
         if (cartProducts && cartProducts.length > 0) {
@@ -26,12 +26,20 @@ const Cart = () => {
         setIsQRLoading(true)
     }, [cartProducts]);
 
+    useEffect(() => {
+        // Kiểm tra nếu có sản phẩm trong giỏ hàng thì hiển thị mã QR
+        if (hasProducts) {
+            setShowQR(true);
+        } else {
+            setShowQR(false);
+        }
+    }, [hasProducts]);
+
     const handleGenerateQRCode = () => {
         window.location.href = `https://img.vietqr.io/image/MB-0566181526-qr_only.png?amount=${cartProducts?.reduce((total, item) => total + item.price * item.quantity * 23000, 0)}`
     }
 
     return (
-
         <div className={cx("container-cart")}>
             <h1>Giỏ hàng Pokémon</h1>
             {hasProducts ? (
@@ -42,42 +50,41 @@ const Cart = () => {
                                 key={item.id}
                                 dataCart={item}
                             />
-
                         </div>
                     )
-
                 })
-
             ) : (
                 <p>Chưa có sản phẩm nào trong giỏ hàng.</p>
             )}
             <p style={{ marginTop: '40px' }}>Tổng tiền:  ${cartProducts?.reduce((total, item) => total + item.price * item.quantity, 0)}</p>
-            <h3>Vui lòng quét mã QR dưới đây để thanh toán mua hàng:</h3>
-            <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                <div style={{ padding: 8, borderRadius: 8, borderWidth: 3, borderStyle: 'solid', borderColor: '#ccc' }}>
-                    <ThreeCircles
-                        visible={isQRLoading}
-                        height="200"
-                        width="200"
-                        color="#4fa94d"
-                        ariaLabel="three-circles-loading"
-                        wrapperStyle={{}}
-                        wrapperClass=""
-                    />
-                    <img
-                        src={`https://img.vietqr.io/image/MB-0566181526-qr_only.png?amount=${cartProducts?.reduce((total, item) => total + item.price * item.quantity * 23000, 0)}`}
-                        style={{ width: '200px', height: '200px', display: isQRLoading ? 'none' : 'block' }}
-                        onLoad={(e) => {
-                            setIsQRLoading(false)
-                        }}
-                    />
-                </div>
+            {showQR && (
 
-            </div>
+                <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                    <h3>Vui lòng quét mã QR dưới đây để thanh toán mua hàng:</h3>
+
+                    <div style={{ padding: 8, borderRadius: 8, borderWidth: 3, borderStyle: 'solid', borderColor: '#ccc' }}>
+                        <ThreeCircles
+                            visible={isQRLoading}
+                            height="200"
+                            width="200"
+                            color="#4fa94d"
+                            ariaLabel="three-circles-loading"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                        />
+                        <img
+                            src={`https://img.vietqr.io/image/MB-0566181526-qr_only.png?amount=${cartProducts?.reduce((total, item) => total + item.price * item.quantity * 23000, 0)}`}
+                            style={{ width: '200px', height: '200px', display: isQRLoading ? 'none' : 'block' }}
+                            onLoad={(e) => {
+                                setIsQRLoading(false)
+                            }}
+                        />
+                    </div>
+                </div>
+            )}
             <div className="cart-total" style={{ marginTop: '40px', textAlign: 'right' }}>
             </div>
         </div>
-
     )
 }
 

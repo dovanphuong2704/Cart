@@ -34,6 +34,8 @@
                 setShopProducts(updatedCartProducts);
             }
         }
+        console.log(shopProducts);
+        
 
         return (
             <table className={cx("shop-item")}>

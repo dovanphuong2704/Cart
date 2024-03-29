@@ -34,7 +34,6 @@ const CreateProduct = () => {
         setShowAddProductForm(false);
     };
 
-    console.log(newProduct);
 
 
     return (
