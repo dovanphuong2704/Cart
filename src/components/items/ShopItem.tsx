@@ -34,7 +34,7 @@
                 setShopProducts(updatedCartProducts);
             }
         }
-        console.log(shopProducts);
+
         
 
         return (

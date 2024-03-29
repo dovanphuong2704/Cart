@@ -56,10 +56,10 @@ const ShopController = () => {
             ];
             setShopProducts(itemProductData)
         }
-    }, [shopProducts])
+    }, [])
     
 
-    return <></>
+    return null
 }
 
 export default ShopController
