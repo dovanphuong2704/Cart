@@ -45,7 +45,7 @@ const Cart = () => {
                         <th>Hành động</th>
                     </tr>
                 </thead>
-                <tbody> 
+                <tbody>
                     {hasProducts ? (
                         cartProducts != null && cartProducts.map((item: IProduct, index: number) => (
                             <CartItem
@@ -54,16 +54,22 @@ const Cart = () => {
                             />
                         ))
                     ) : (
-                        <tr> 
-                            <td colSpan={6}>Chưa có sản phẩm nào trong giỏ hàng.</td>
+                        <tr>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <td colSpan={6}><strong>Chưa có sản phẩm nào trong giỏ hàng.</strong></td>
                         </tr>
                     )}
                 </tbody>
             </table>
-
-            <p style={{ marginTop: '40px', textAlign: 'right' }}>
-                Tổng tiền: ${cartProducts?.reduce((total, item) => total + item.price * item.quantity, 0)}
+            <p style={{ marginTop: '40px', textAlign: 'left' }}>
+                Có tất cả <strong style={{ color: 'red' }}>{cartProducts?.reduce((total, item) => total + item.quantity, 0)}</strong> sản phẩm trong giỏ hàng.
+                Tổng số tiền: <strong style={{ color: 'red' }}>${cartProducts?.reduce((total, item) => total + item.price * item.quantity, 0)}</strong>
             </p>
+
             {showQR && (
                 <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                     <h3>Vui lòng quét mã QR dưới đây để thanh toán mua hàng:</h3>
