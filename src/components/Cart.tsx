@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { LocalStorageKeys, useLocalStorage } from "../utils/useLocalStorage"
 import { IProduct } from "../types/Types"
-import CartItem from "./items/CartItem"
+import CartItem from './items/CartItem'
 import styles from "./Cart.module.scss"
 import classNames from "classnames/bind"
 import { ThreeCircles } from "react-loader-spinner"
@@ -30,6 +30,8 @@ const Cart = () => {
             setShowQR(false);
         }
     }, [hasProducts]);
+    console.log(cartProducts);
+    
 
     return (
         <div className={cx("container-cart")}>
@@ -55,12 +57,7 @@ const Cart = () => {
                         ))
                     ) : (
                         <tr>
-                            <br />
-                            <br />
-                            <br />
-                            <br />
-                            <br />
-                            <td colSpan={6}><strong>Chưa có sản phẩm nào trong giỏ hàng.</strong></td>
+                            <td style={{ margin: '20px' }} colSpan={6}><strong >Chưa có sản phẩm nào trong giỏ hàng.</strong></td>
                         </tr>
                     )}
                 </tbody>

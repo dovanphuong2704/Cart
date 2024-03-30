@@ -1,31 +1,31 @@
-// ShopItem.module.scss
-
-.new-product-form label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold; 
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
 }
 
-.new-product-form input[type="text"],
-.new-product-form input[type="number"] {
-    width: 100%; 
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 5px;
-    box-sizing: border-box;
-}
+.form-wrapper {
+    h3 {
+        text-align: center;
+    }
+    
+    .row {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 16px;
+        padding: 8px;
 
-.new-product-form button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin-top: 10px;
-}
 
-.new-product-form button:last-child {
-    margin-left: 10px;
-    background-color: #dc3545;
+        label {
+            font-weight: 600;
+            flex: 1;
+            display: block;
+            margin-right: 16px;
+        }
+
+        input {
+            width: 200px;
+            padding: 8px;
+            border-radius: 4px;
+        }
+    }
 }

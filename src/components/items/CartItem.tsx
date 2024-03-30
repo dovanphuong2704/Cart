@@ -5,6 +5,7 @@ import styles from './CartItem.module.scss'
 import classNames from "classnames/bind"
 import { toast } from "react-toastify";
 const cx = classNames.bind(styles)
+import { Button, Input } from "antd";
 
 interface ShopItemProps {
     dataCart: IProduct
@@ -75,7 +76,7 @@ const CartItem = ({ dataCart }: ShopItemProps) => {
             </td>
             <td className={cx("cart-product-price")}>${dataCart.price}</td>
             <td className={cx("cart-product-quantity")}>
-                <input
+                <Input
                     type="number"
                     id="quantity"
                     name="quantity"
@@ -86,8 +87,8 @@ const CartItem = ({ dataCart }: ShopItemProps) => {
             </td>
             <td className={cx("cart-product-total")}>${dataCart.price * dataCart.quantity}</td>
             <td className={cx("cart-product-action")}>
-                <button className={cx("button-cart-update")} onClick={handleUpdate}>Cập nhật</button>
-                <button className={cx("button-cart-delete")} onClick={handleDelete}>Xóa</button>
+                <Button className={cx("button-cart-update")} onClick={handleUpdate} type='primary' style={{ marginRight: 8 }}>Cập nhật</Button>
+                <Button className={cx("")} onClick={handleDelete} type='primary' danger>Xóa</Button>
             </td>
         </tr>
     )

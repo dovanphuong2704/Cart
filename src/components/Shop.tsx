@@ -17,7 +17,6 @@ const Shop = () => {
         <div>
             <h1>Danh sách sản phẩm Pokémon</h1>
             <ShopController />
-            <CreateProduct />
 
             {shopProducts != null && shopProducts.map((item: IProduct, index: number) => {
                 return (
@@ -32,6 +31,8 @@ const Shop = () => {
             {shopProducts && shopProducts.length === 0 && (
                 <div className={cx("empty-list")}>Không có sản phẩm</div>
             )}
+
+            <CreateProduct />
         </div>
 
     )

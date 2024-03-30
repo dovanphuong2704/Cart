@@ -4,6 +4,7 @@ import { LocalStorageKeys, useLocalStorage } from "../../utils/useLocalStorage"
 import styles from './ShopItem.module.scss'
 import classNames from "classnames/bind"
 import { toast } from "react-toastify"
+import { Button } from "antd";
 
 const cx = classNames.bind(styles)
 interface ShopItemProps {
@@ -70,12 +71,12 @@ const ShopItem = ({ data }: ShopItemProps) => {
                         )}
                         <div className={cx("product-actions")}>
                             {data.quantity > 0 ? (
-                                <button onClick={() => handleAddToCart()}>Thêm vào giỏ hàng</button>
+                                <Button onClick={() => handleAddToCart()}>Thêm vào giỏ hàng</Button>
                             ) : (
-                                <button className={cx("out-of-stock")} disabled>Thêm vào giỏ hàng</button>
+                                <Button className={cx("out-of-stock")} disabled>Thêm vào giỏ hàng</Button>
                             )}
                         </div>
-                        <button onClick={handleDelete}>Xóa</button>
+                        <Button onClick={handleDelete} danger type='primary'>Xóa</Button>
 
                     </td>
                 </tr>
@@ -89,8 +90,8 @@ const ShopItem = ({ data }: ShopItemProps) => {
                                 <p>Giá: ${data.price}</p>
                                 <p>Mô tả: {data.description}</p>
                                 <div className={cx("two-button")}>
-                                    <button onClick={handleConfirm}>Xác nhận</button>
-                                    <button onClick={handleCancel}>Hủy</button>
+                                    <Button onClick={handleConfirm}>Xác nhận</Button>
+                                    <Button onClick={handleCancel}>Hủy</Button>
                                 </div>
                             </div>
                         </td>

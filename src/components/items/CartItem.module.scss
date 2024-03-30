@@ -63,10 +63,16 @@
 }
 
 .cart-product-quantity input[type="number"] {
-    width: 50px;
-    padding: 5px;
+    width: 70px;
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 3px;
     outline: none;
-    margin-top: 30px;
+    margin-top: 24px;
+}
+
+.input-quantity {
+    display: flex;
+    justify-content: center;
+    margin-top: 18px;
 }
