@@ -48,7 +48,7 @@ const CartItem = ({ dataCart }: ShopItemProps) => {
                 const updatedCartProducts = cartProducts.filter(product => product.id !== dataCart.id);
                 setCartProducts(updatedCartProducts);
             }
-        }        
+        }
     }, [cartProducts, shopProducts, dataCart.id, setCartProducts]);
 
 
@@ -69,7 +69,7 @@ const CartItem = ({ dataCart }: ShopItemProps) => {
     }
 
     return (
-        <tr>
+        <tr style={{height: "140px", border: '1px solid #ccc'}}>
             <td className={cx("cart-product-image-cell")}>
                 <img className={cx("cart-product-image")} src={dataCart.image} alt={dataCart.name} />
             </td>
@@ -78,7 +78,7 @@ const CartItem = ({ dataCart }: ShopItemProps) => {
                 Còn: {shopItem.quantity - dataCart.quantity}
             </td>
             <td className={cx("cart-product-price")}>${dataCart.price}</td>
-            <td className={cx("")} style={{textAlign: "center"}}>
+            <td className={cx("")} style={{ textAlign: "center" }}>
                 <InputNumber
                     id="quantity"
                     name="quantity"
