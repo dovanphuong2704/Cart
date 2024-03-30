@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { IProduct } from "../../types/Types"
 import { LocalStorageKeys, useLocalStorage } from "../../utils/useLocalStorage"
 import styles from './ShopItem.module.scss'
@@ -18,6 +18,19 @@ const ShopItem = ({ data }: ShopItemProps) => {
         setShowDetails(true);
     };
 
+    const cartItem: IProduct = useMemo(() => {
+        const DUMMY_DATA = {
+            id: -1,
+            name: '',
+            description: '',
+            quantity: 0,
+            image: '',
+            price: 0
+        }
+        if (!cartProducts) return DUMMY_DATA
+        const result = cartProducts.filter((product) => product.id === data.id)[0]
+        return result || DUMMY_DATA
+    }, [data, cartProducts])
 
 
     const handleConfirm = () => {
@@ -39,6 +52,8 @@ const ShopItem = ({ data }: ShopItemProps) => {
         if (shopProducts !== null) {
             const updatedCartProducts = shopProducts.filter(product => product.id !== data.id);
             setShopProducts(updatedCartProducts);
+
+            toast("Đã xóa thành công!", { type: 'success', theme: 'colored' })
         }
     }
 
@@ -67,7 +82,7 @@ const ShopItem = ({ data }: ShopItemProps) => {
                         {data.quantity === 0 ? (
                             <div className={cx("product-quantity")} style={{ color: '#8B0000' }}>Đã hết hàng</div>
                         ) : (
-                            <div className={cx("product-quantity")}>Số lượng hàng: {data.quantity}</div>
+                            <div className={cx("product-quantity")}>Số lượng hàng: {data.quantity - cartItem.quantity}</div>
                         )}
                         <div className={cx("product-actions")}>
                             {data.quantity > 0 ? (

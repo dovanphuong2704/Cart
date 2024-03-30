@@ -7,6 +7,9 @@ import Modal from 'react-modal'
 import Input from "antd/es/input/Input";
 import { Button } from "antd";
 
+
+Modal.setAppElement('#root');
+
 const cx = classNames.bind(styles);
 
 const customStyles = {
@@ -52,7 +55,7 @@ const CreateProduct = () => {
 
     return (
         <>
-            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'end', paddingRight: 30, marginTop: 16}}>
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'end', paddingRight: 30, marginTop: 16 }}>
                 <Button className={cx("button-new")} onClick={() => setShowAddProductForm(!showAddProductForm)}
                     type='primary'
                 >

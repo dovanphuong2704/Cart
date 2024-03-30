@@ -20,7 +20,7 @@ const Cart = () => {
         } else {
             setHasProducts(false);
         }
-        setIsQRLoading(true)
+        setIsQRLoading(false)
     }, [cartProducts]);
 
     useEffect(() => {
@@ -30,8 +30,6 @@ const Cart = () => {
             setShowQR(false);
         }
     }, [hasProducts]);
-    console.log(cartProducts);
-    
 
     return (
         <div className={cx("container-cart")}>

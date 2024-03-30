@@ -11,7 +11,6 @@ const cx = classNames.bind(styles)
 
 const Shop = () => {
     const [shopProducts, setShopProducts] = useLocalStorage(LocalStorageKeys.SHOP_PRODUCTS)
-    const [cartProducts, setCartProducts] = useLocalStorage(LocalStorageKeys.CART_PRODUCTS)
 
     return (
         <div>

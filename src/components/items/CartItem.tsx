@@ -1,11 +1,11 @@
 import { IProduct } from "../../types/Types"
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { LocalStorageKeys, useLocalStorage } from "../../utils/useLocalStorage"
 import styles from './CartItem.module.scss'
 import classNames from "classnames/bind"
 import { toast } from "react-toastify";
 const cx = classNames.bind(styles)
-import { Button, Input } from "antd";
+import { Button, InputNumber } from "antd";
 
 interface ShopItemProps {
     dataCart: IProduct
@@ -15,8 +15,6 @@ const CartItem = ({ dataCart }: ShopItemProps) => {
     const [cartProducts, setCartProducts] = useLocalStorage(LocalStorageKeys.CART_PRODUCTS)
     const [shopProducts, setShopProducts] = useLocalStorage(LocalStorageKeys.SHOP_PRODUCTS)
     const [newQuantity, setNewQuantity] = useState<number>(dataCart.quantity)
-    const [remainingQuantity, setRemainingQuantity] = useState<number>(0)
-
     const shopItem: IProduct = useMemo(() => {
         const DUMMY_DATA = {
             id: -1,
@@ -35,30 +33,35 @@ const CartItem = ({ dataCart }: ShopItemProps) => {
         if (cartProducts) {
             const updatedCartProducts = cartProducts.filter(product => product.id !== dataCart.id)
             setCartProducts(updatedCartProducts)
+
+            toast("Đã xóa thành công!", { type: 'success', theme: 'colored' })
+
         }
     }
 
+
+    // khi xóa trong list của shop thì trong giỏ hàng cũng không có
+    useEffect(() => {
+        if (cartProducts && shopProducts) {
+            const isProductInShop = shopProducts.some(shopProduct => shopProduct.id === dataCart.id);
+            if (!isProductInShop) {
+                const updatedCartProducts = cartProducts.filter(product => product.id !== dataCart.id);
+                setCartProducts(updatedCartProducts);
+            }
+        }        
+    }, [cartProducts, shopProducts, dataCart.id, setCartProducts]);
+
+
     const handleUpdate = () => {
         if (newQuantity <= shopItem.quantity) {
-            const updatedShopProducts = [...shopProducts || []]
-            const idx = updatedShopProducts.findIndex(product => product.id === dataCart.id)
-            const remainingQuantity = idx !== -1 ? updatedShopProducts[idx].quantity - newQuantity : 0
-            if (idx !== -1) {
-                const updatedProductCopy = { ...updatedShopProducts[idx] }
-                updatedProductCopy.quantity = remainingQuantity
-                updatedShopProducts[idx] = updatedProductCopy
-                setShopProducts(updatedShopProducts)
-                setRemainingQuantity(remainingQuantity)
-                if (cartProducts) {
-                    const updatedProductIndex = cartProducts.findIndex(product => product.id === dataCart.id)
-                    const updatedProduct = { ...cartProducts[updatedProductIndex] }
-                    updatedProduct.quantity = newQuantity
-                    const updatedCartProducts = [...cartProducts]
-                    updatedCartProducts[updatedProductIndex] = updatedProduct
-                    setCartProducts(updatedCartProducts)
+            const updatedCartProducts: IProduct[] = cartProducts?.map(product => {
+                if (product.id === dataCart.id) {
+                    return { ...product, quantity: newQuantity };
                 }
-            }
-            // alert("Đã cập nhật thành công")
+                return product;
+            }) || [];
+            setCartProducts(updatedCartProducts);
+
             toast('Đã cập nhật thành công!', { type: 'success', theme: 'colored' })
         } else {
             toast('Không đủ số lượng hàng!', { type: 'error', theme: 'colored' })
@@ -67,22 +70,21 @@ const CartItem = ({ dataCart }: ShopItemProps) => {
 
     return (
         <tr>
-            <td className={cx("cart-product-image-cell")}>  
+            <td className={cx("cart-product-image-cell")}>
                 <img className={cx("cart-product-image")} src={dataCart.image} alt={dataCart.name} />
             </td>
             <td className={cx("cart-product-name")}>
                 {dataCart.name} <br />
-                Còn: {shopItem.quantity}
+                Còn: {shopItem.quantity - dataCart.quantity}
             </td>
             <td className={cx("cart-product-price")}>${dataCart.price}</td>
-            <td className={cx("cart-product-quantity")}>
-                <Input
-                    type="number"
+            <td className={cx("")} style={{textAlign: "center"}}>
+                <InputNumber
                     id="quantity"
                     name="quantity"
-                    value={newQuantity.toString()}
-                    onChange={(e) => setNewQuantity(parseInt(e.target.value))}
-                    min="1"
+                    value={newQuantity}
+                    onChange={(e) => setNewQuantity(e || 1)}
+                    min={1}
                 />
             </td>
             <td className={cx("cart-product-total")}>${dataCart.price * dataCart.quantity}</td>
