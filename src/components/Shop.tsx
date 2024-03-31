@@ -10,7 +10,7 @@ import CreateProduct from './items/CreateProduct'
 const cx = classNames.bind(styles)
 
 const Shop = () => {
-    const [shopProducts, setShopProducts] = useLocalStorage(LocalStorageKeys.SHOP_PRODUCTS)
+    const [shopProducts] = useLocalStorage(LocalStorageKeys.SHOP_PRODUCTS)
 
     return (
         <div>

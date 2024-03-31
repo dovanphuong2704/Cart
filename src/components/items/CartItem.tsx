@@ -4,8 +4,10 @@ import { LocalStorageKeys, useLocalStorage } from "../../utils/useLocalStorage"
 import styles from './CartItem.module.scss'
 import classNames from "classnames/bind"
 import { toast } from "react-toastify";
-const cx = classNames.bind(styles)
 import { Button, InputNumber } from "antd";
+
+const cx = classNames.bind(styles)
+
 
 interface ShopItemProps {
     dataCart: IProduct
@@ -13,7 +15,7 @@ interface ShopItemProps {
 
 const CartItem = ({ dataCart }: ShopItemProps) => {
     const [cartProducts, setCartProducts] = useLocalStorage(LocalStorageKeys.CART_PRODUCTS)
-    const [shopProducts, setShopProducts] = useLocalStorage(LocalStorageKeys.SHOP_PRODUCTS)
+    const [shopProducts] = useLocalStorage(LocalStorageKeys.SHOP_PRODUCTS)
     const [newQuantity, setNewQuantity] = useState<number>(dataCart.quantity)
     const shopItem: IProduct = useMemo(() => {
         const DUMMY_DATA = {
@@ -69,7 +71,7 @@ const CartItem = ({ dataCart }: ShopItemProps) => {
     }
 
     return (
-        <tr style={{height: "140px", border: '1px solid #ccc'}}>
+        <tr style={{ height: "140px", border: '1px solid #ccc' }}>
             <td className={cx("cart-product-image-cell")}>
                 <img className={cx("cart-product-image")} src={dataCart.image} alt={dataCart.name} />
             </td>

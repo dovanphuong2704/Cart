@@ -9,7 +9,7 @@ import { ThreeCircles } from "react-loader-spinner"
 const cx = classNames.bind(styles)
 
 const Cart = () => {
-    const [cartProducts, setCartProducts] = useLocalStorage(LocalStorageKeys.CART_PRODUCTS)
+    const [cartProducts] = useLocalStorage(LocalStorageKeys.CART_PRODUCTS)
     const [isQRLoading, setIsQRLoading] = useState(true)
     const [hasProducts, setHasProducts] = useState(false);
     const [showQR, setShowQR] = useState(false);
@@ -47,7 +47,7 @@ const Cart = () => {
                 </thead>
                 <tbody>
                     {hasProducts ? (
-                        cartProducts != null && cartProducts.map((item: IProduct, index: number) => (
+                        cartProducts != null && cartProducts.map((item: IProduct) => (
                             <CartItem
                                 key={item.id}
                                 dataCart={item}

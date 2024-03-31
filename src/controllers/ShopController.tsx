@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { LocalStorageKeys, useLocalStorage } from "../utils/useLocalStorage";
 import { IProduct } from "../types/Types";
 import bulbasaur from '../assets/images/bulbasaur.png';

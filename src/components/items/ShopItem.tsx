@@ -66,7 +66,7 @@ const ShopItem = ({ data }: ShopItemProps) => {
         <table className={cx("shop-item")}>
 
             <tbody>
-                <tr key={data.id} className={cx("product-item", { "out-of-stock": data.quantity === 0 })}>
+                <tr key={data.id} className={cx("product-item", { "out-of-stock": data.quantity - cartItem.quantity === 0 })}>
                     <td>
                         <img src={data.image} alt={data.name} className={cx("product-image")} />
                     </td>
@@ -79,13 +79,13 @@ const ShopItem = ({ data }: ShopItemProps) => {
                     <td className={cx("container-quantity")}>
 
                         <div className={cx("product-price")} > ${data.price} / con</div>
-                        {data.quantity === 0 ? (
+                        {data.quantity - cartItem.quantity === 0 ? (
                             <div className={cx("product-quantity")} style={{ color: '#8B0000' }}>Đã hết hàng</div>
                         ) : (
                             <div className={cx("product-quantity")}>Số lượng hàng: {data.quantity - cartItem.quantity}</div>
                         )}
                         <div className={cx("product-actions")}>
-                            {data.quantity > 0 ? (
+                            {data.quantity - cartItem.quantity > 0 ? (
                                 <Button onClick={() => handleAddToCart()}>Thêm vào giỏ hàng</Button>
                             ) : (
                                 <Button className={cx("out-of-stock")} disabled>Thêm vào giỏ hàng</Button>
